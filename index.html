@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="container">
+                <h1>AI Mock Interview</h1>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-method">Login with:</label>
+                        <select id="login-method">
+                            <option value="email">Email</option>
+                            <option value="phone">Phone Number</option>
+                        </select>
+                    </div>
+                    <div class="form-group email-input">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group phone-input hidden">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <button type="submit" class="btn primary">Login</button>
+                    <p>Don't have an account? <a href="#" id="register-link">Register</a></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div id="register-page" class="page">
+            <div class="container">
+                <h1>Create Account</h1>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-name">Full Name:</label>
+                        <input type="text" id="reg-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email:</label>
+                        <input type="email" id="reg-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-phone">Phone Number:</label>
+                        <input type="tel" id="reg-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password:</label>
+                        <input type="password" id="reg-password" required>
+                    </div>
+                    <button type="submit" class="btn primary">Register</button>
+                    <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <div class="container">
+                <h1>Welcome to AI Mock Interview</h1>
+                <div class="interview-options">
+                    <div class="option-card">
+                        <h2>Resume Upload</h2>
+                        <p>Upload your resume and AI will tailor questions based on your experience</p>
+                        <form id="resume-form">
+                            <div class="form-group">
+                                <label for="resume">Upload Resume (PDF/DOCX):</label>
+                                <input type="file" id="resume" accept=".pdf,.docx">
+                            </div>
+                            <button type="submit" class="btn primary">Start Interview</button>
+                        </form>
+                    </div>
+                    <div class="option-card">
+                        <h2>Custom Interview</h2>
+                        <p>Customize your interview by selecting subject and number of questions</p>
+                        <form id="custom-interview-form">
+                            <div class="form-group">
+                                <label for="subject">Subject/Role:</label>
+                                <select id="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="javascript">JavaScript Developer</option>
+                                    <option value="python">Python Developer</option>
+                                    <option value="java">Java Developer</option>
+                                    <option value="product-management">Product Management</option>
+                                    <option value="data-science">Data Science</option>
+                                    <option value="ui-ux">UI/UX Designer</option>
+                                    <option value="marketing">Digital Marketing</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">Experience Level:</label>
+                                <select id="experience" required>
+                                    <option value="entry">Entry Level</option>
+                                    <option value="mid">Mid Level</option>
+                                    <option value="senior">Senior Level</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="questions">Number of Questions:</label>
+                                <input type="number" id="questions" min="5" max="20" value="10" required>
+                            </div>
+                            <button type="submit" class="btn primary">Start Interview</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="past-interviews">
+                    <h2>Past Interviews</h2>
+                    <div id="interview-history">
+                        <!-- Will be populated dynamically -->
+                        <p class="empty-state">No past interviews found</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interview Page -->
+        <div id="interview-page" class="page">
+            <div class="container">
+                <h1 id="interview-title">Mock Interview</h1>
+                <div class="interview-area">
+                    <div class="video-container">
+                        <video id="user-video" autoplay muted></video>
+                        <div class="controls">
+                            <button id="mic-toggle" class="btn icon">🎤</button>
+                            <button id="camera-toggle" class="btn icon">📷</button>
+                        </div>
+                    </div>
+                    <div class="ai-interviewer">
+                        <div class="ai-avatar">
+                            <img src="https://via.placeholder.com/100" alt="AI Interviewer">
+                        </div>
+                        <div class="speech-bubble">
+                            <p id="current-question">The interview will begin shortly...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="interview-controls">
+                    <button id="next-question" class="btn primary">Next Question</button>
+                    <button id="end-interview" class="btn secondary">End Interview</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Page -->
+        <div id="feedback-page" class="page">
+            <div class="container">
+                <h1>Interview Feedback</h1>
+                <div class="feedback-summary">
+                    <h2>Summary</h2>
+                    <div id="score-display">
+                        <div class="score-circle">
+                            <span id="score-value">0</span>
+                        </div>
+                    </div>
+                    <p id="overall-feedback">Loading feedback...</p>
+                </div>
+                <div class="detailed-feedback">
+                    <h2>Detailed Feedback</h2>
+                    <div id="question-responses">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+                <div class="improvement-areas">
+                    <h2>Areas for Improvement</h2>
+                    <ul id="improvement-list">
+                        <!-- Will be populated dynamically -->
+                    </ul>
+                </div>
+                <div class="interview-actions">
+                    <button id="save-feedback" class="btn primary">Save Feedback</button>
+                    <button id="return-home" class="btn secondary">Return to Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
